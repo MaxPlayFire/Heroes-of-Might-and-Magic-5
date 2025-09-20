@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='HeroSkill',
+            name='HeroAbility',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('level', models.CharField(choices=[('basic', 'Basic'), ('advanced', 'Advanced'), ('expert', 'Expert')], default='basic', max_length=20)),
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='hero',
             name='skills',
-            field=models.ManyToManyField(through='Magic.HeroSkill', to='Magic.skill'),
+            field=models.ManyToManyField(through='Magic.HeroAbility', to='Magic.skill'),
         ),
         migrations.AddField(
             model_name='hero',

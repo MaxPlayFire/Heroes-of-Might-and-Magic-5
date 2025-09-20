@@ -1,0 +1,25 @@
+{% extends "Magic/base.html" %} {% block title %}Скіли{% endblock %} {% block content %}
+<h1>Список скілів</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Опис</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for skill in skills %}
+        <tr>
+            <td>{{ skill.title }}</td>
+            <td>{{ skill.content|truncatewords:15 }}</td>
+            <td><a href="{% url 'Magic:skill_detail' skill.pk %}">Деталі</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Немає скілів.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

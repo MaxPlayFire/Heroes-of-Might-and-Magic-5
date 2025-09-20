@@ -1,0 +1,27 @@
+{% extends "Magic/base.html" %} {% block title %}Герої{% endblock %} {% block content %}
+<h1>Список героїв</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Ім’я</th>
+            <th>Фракція</th>
+            <th>Спеціалізація</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hero in heroes %}
+        <tr>
+            <td>{{ hero.name }}</td>
+            <td>{{ hero.faction|default:"—" }}</td>
+            <td>{{ hero.specialization|default:"—" }}</td>
+            <td><a href="{% url 'Magic:hero_detail' hero.pk %}">Деталі</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Немає героїв.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

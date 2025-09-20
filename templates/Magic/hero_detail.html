@@ -1,0 +1,20 @@
+{% extends "Magic/base.html" %} {% block title %}{{ hero.name }}{% endblock %} {% block content %}
+<h1>{{ hero.name }}</h1>
+<p>Фракція: {{ hero.faction|default:"—" }}</p>
+<p>Спеціалізація: {{ hero.specialization|default:"—" }}</p>
+
+<h3>Скіли героя</h3>
+<ul>
+    {% for hs in hero_skills %}
+    <li>{{ hs.skill.title }} ({{ hs.get_level_display }})</li>
+    {% empty %}
+    <li>Герой ще не має скілів.</li>
+    {% endfor %}
+</ul>
+
+<h4>Додати скіл</h4>
+<form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Додати</button>
+</form>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Skill, Ability, Specialization, Hero, HeroSkill
+from .models import Skill, Ability, Specialization, Hero, HeroAbility
 
 
 @admin.register(Skill)
@@ -35,8 +35,8 @@ class SpecializationAdmin(admin.ModelAdmin):
     short_description.short_description = "Description"
 
 
-class HeroSkillInline(admin.TabularInline):
-    model = HeroSkill
+class HeroAbilityInline(admin.TabularInline):
+    model = HeroAbility
     extra = 1
 
 
@@ -45,12 +45,12 @@ class HeroAdmin(admin.ModelAdmin):
     list_display = ("name", "faction", "specialization")
     list_filter = ("faction", "specialization")
     search_fields = ("name", "faction")
-    inlines = [HeroSkillInline]
-    filter_horizontal = ("abilities",)
+    inlines = [HeroAbilityInline]
+#    filter_horizontal = ("skills",)
 
 
-@admin.register(HeroSkill)
-class HeroSkillAdmin(admin.ModelAdmin):
-    list_display = ("hero", "skill", "level")
-    list_filter = ("level", "hero", "skill")
-    search_fields = ("hero__name", "skill__title")
+@admin.register(HeroAbility)
+class HeroAbilityAdmin(admin.ModelAdmin):
+    list_display = ("hero", "ability", )
+    list_filter = ( "hero", "ability")
+    search_fields = ("hero__name", "ability__title")

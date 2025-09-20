@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Герої{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Magic/style.css' %}">
+</head>
+
+<body>
+    <div class="content">
+
+        <div class="tabs">
+            <a href="{% url 'Magic:hero_list' %}" class="tab">Герої</a>
+            <a href="{% url 'Magic:all_skills' %}" class="tab">Скіли</a>
+            <a href="{% url 'Magic:hero_create' %}" class="tab">Додати героя</a>
+        </div>
+
+        {% if messages %} {% for message in messages %}
+        <p class="error">{{ message }}</p>
+        {% endfor %} {% endif %} {% block content %}{% endblock %}
+
+    </div>
+</body>
+
+</html>

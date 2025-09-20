@@ -1,0 +1,24 @@
+{% extends "Magic/base.html" %} {% block title %}{{ ability.title }}{% endblock %} {% block content %}
+<h1>{{ ability.title }}</h1>
+<p><strong>Рівень:</strong> {{ ability.get_level_display }}</p>
+<p><strong>Скіл:</strong> {{ ability.skill.title }}</p>
+<p><strong>Опис:</strong> {{ ability.content }}</p>
+
+<h3>Передумови (prerequisites)</h3>
+<ul>
+    {% for prereq in ability.prerequisites.all %}
+    <li><a href="{% url 'Magic:ability_detail' prereq.pk %}">{{ prereq.title }}</a></li>
+    {% empty %}
+    <li>Немає.</li>
+    {% endfor %}
+</ul>
+
+<h3>Відкриває (unlocks)</h3>
+<ul>
+    {% for unlock in ability.unlocks.all %}
+    <li><a href="{% url 'Magic:ability_detail' unlock.pk %}">{{ unlock.title }}</a></li>
+    {% empty %}
+    <li>Нічого не відкриває.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

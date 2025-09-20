@@ -1,0 +1,27 @@
+{% extends "Magic/base.html" %} {% block title %}Абілки{% endblock %} {% block content %}
+<h1>Список абілок</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Рівень</th>
+            <th>Скіл</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ability in abilities %}
+        <tr>
+            <td>{{ ability.title }}</td>
+            <td>{{ ability.get_level_display }}</td>
+            <td>{{ ability.skill.title }}</td>
+            <td><a href="{% url 'Magic:ability_detail' ability.pk %}">Деталі</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Немає абілок.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

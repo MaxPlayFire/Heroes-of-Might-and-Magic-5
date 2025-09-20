@@ -6,7 +6,7 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "App.settings")
 django.setup()
 
-from Magic.models import Skill, Ability, Specialization, Hero, HeroSkill
+from Magic.models import Skill, Ability, Specialization, Hero, HeroAbility
 
 def run():
     # Створюємо навички
@@ -26,9 +26,9 @@ def run():
     hero = Hero.objects.create(name="Alaric", faction="Sylvan", specialization=bow_mastery)
 
     # Прив’язуємо навички до героя
-    HeroSkill.objects.create(hero=hero, skill=attack, level="basic")
-    HeroSkill.objects.create(hero=hero, skill=defense, level="advanced")
-    HeroSkill.objects.create(hero=hero, skill=sorcery, level="expert")
+    HeroAbility.objects.create(hero=hero, skill=attack, level="basic")
+    HeroAbility.objects.create(hero=hero, skill=defense, level="advanced")
+    HeroAbility.objects.create(hero=hero, skill=sorcery, level="expert")
 
     # Прив’язуємо здібності
     hero.abilities.add(archery, magic_resistance)

@@ -1,0 +1,13 @@
+{% extends "Magic/base.html" %} {% block title %}{{ skill.title }}{% endblock %} {% block content %}
+<h1>{{ skill.title }}</h1>
+<p>{{ skill.content|default:"Немає опису." }}</p>
+
+<h3>Зв’язані абілки</h3>
+<ul>
+    {% for ability in abilities %}
+    <li><a href="{% url 'Magic:ability_detail' ability.pk %}">{{ ability.title }}</a> ({{ ability.get_level_display }})</li>
+    {% empty %}
+    <li>Немає пов’язаних абілок.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
