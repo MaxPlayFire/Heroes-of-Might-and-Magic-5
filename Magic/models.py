@@ -49,7 +49,7 @@ class Hero(models.Model):
     name = models.CharField(max_length=100, unique=True)
     faction = models.CharField(max_length=100, blank=True)
     skills = models.ManyToManyField(Skill)
-    abilities = models.ManyToManyField(Ability, through='HeroAbility', through_fields=('hero', 'ability'), related_name='heroes', null=True , blank=True)
+    abilities = models.ManyToManyField(Ability, through='HeroAbility', through_fields=('hero', 'ability'), related_name='heroes', blank=True)
     specialization = models.ForeignKey(Specialization, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
@@ -58,7 +58,7 @@ class Hero(models.Model):
 
 class HeroAbility(models.Model):
     hero = models.ForeignKey(Hero, on_delete=models.CASCADE, related_name="hero_abilities")
-    ability = models.ForeignKey(Ability, on_delete=models.CASCADE, related_name="aility_links", null=True, blank=True)
+    ability = models.ForeignKey(Ability, on_delete=models.CASCADE, related_name="ability_links")
 
     class Meta:
         unique_together = ("hero", "ability")

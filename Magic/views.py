@@ -1,5 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404, redirect, render
@@ -72,3 +74,16 @@ def hero_create(request):
 def hero_list(request):
     heroes = Hero.objects.select_related("specialization").prefetch_related("skills", "abilities")
     return render(request, "Magic/hero_list.html", {"heroes": heroes})
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Обліковий запис створено.")
+            return redirect("Magic:hero_list")
+    else:
+        form = UserCreationForm()
+    return render(request, "Magic/auth/register.html", {"form": form})
